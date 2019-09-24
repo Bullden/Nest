@@ -22,7 +22,8 @@ export class BooksController {
     findBooksByTitle(@Req() req: Request): any {
         return this.booksService.findBooksByTitle(req);
     }
-
+    
+    @UseGuards(AuthGuard('jwt'))
     @Delete('/:id')
     deleteBook(@Req() req: Request): any {
         return this.booksService.deleteBook(req);

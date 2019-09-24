@@ -3,12 +3,12 @@ import  Environments  from '../config/config'
 @Catch()
 export class ExceptionHandlerFilter implements ExceptionFilter {
     catch(error: Error, host: ArgumentsHost) {
-        var logger = require('logzio-nodejs').createLogger({
-            token: 'PlstCoIDoKwqBslCYmLyXYyhBSjWLyVM',
-            protocol: 'https',
-            host: 'listener.logz.io',
-            port: '8071'
-        });
+        // var logger = require('logzio-nodejs').createLogger({
+        //     token: 'PlstCoIDoKwqBslCYmLyXYyhBSjWLyVM',
+        //     protocol: 'https',
+        //     host: 'listener.logz.io',
+        //     port: '8071'
+        // });
         let response = host.switchToHttp().getResponse();
 
         let status = (error instanceof HttpException) ?
@@ -19,12 +19,12 @@ export class ExceptionHandlerFilter implements ExceptionFilter {
         }
         if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
             if (process.env.NODE_ENV == Environments.Production.toString()) {
-                var obj = {
-                    message: error.message,
-                    name: error.name,
-                    stack: error.stack
-                };
-                logger.log(obj);
+                // var obj = {
+                //     message: error.message,
+                //     name: error.name,
+                //     stack: error.stack
+                // };
+                // logger.log(obj);
                 return response.status(status).send('Internal Server Error!');
             }
             else {

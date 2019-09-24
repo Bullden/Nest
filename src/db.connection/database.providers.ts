@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { books } from '../books/books.entity';
 import { users, users_roles, roles } from '../users/users.entity';
+
 import env from '../config/config'
 
 export const databaseProviders = [
@@ -10,7 +11,7 @@ export const databaseProviders = [
       const sequelize = new Sequelize({
         dialect: 'mysql',
         host: env.Production.DB_HOST,
-        port: 3306,
+        port: env.Production.DB_PORT,
         username: env.Production.DB_USER,
         password: env.Production.DB_PASSWORD,
         database: env.Production.DB_NAME,
