@@ -4,8 +4,8 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';
-import conf from './config/config'
-import { ExceptionHandlerFilter } from './helper/error-handler';
+import conf from './enviroment/config'
+import { ExceptionHandlerFilter } from './common/exeption-handler.filter';
 
 async function bootstrap() {
 

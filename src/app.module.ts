@@ -1,27 +1,17 @@
+import { AuthRepository,BooksRepository, UserRolesRepository, UsersRepository } from './repositories';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './db.connection/db-module';
 
-import { BooksController } from './books/books.controller';
-import { BooksService } from './books/books.service';
-import { booksProviders } from './books/books.providers';
-
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
-import { usersProviders, rolesProviders , usersrolesProviders} from './users/users.providers';
-
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { authProviders } from './auth/auth.providers';
-import { LocalStrategy } from './auth/local.strategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './auth/constants';
-import { JwtStrategy } from './users/jwt.strategy';
-import { ConfigModule } from './config/config.module';
+import { jwtConstants } from './secrets/jwtSecretKey';
+import { UsersController, AuthController, BooksController } from './controllers';
+import { LocalStrategy, JwtStrategy } from './common';
+import { UsersService, AuthService, BooksService } from './services';
+import { usersProviders, authProviders, rolesProviders, usersrolesProviders, booksProviders } from './providers';
 
 @Module({
   imports: [
-    ConfigModule,
     DatabaseModule,
     PassportModule,
     JwtModule.register({
@@ -39,7 +29,11 @@ import { ConfigModule } from './config/config.module';
     AuthService,
     ...authProviders,
     ...rolesProviders,
-    ...usersrolesProviders
+    ...usersrolesProviders,
+    AuthRepository,
+    BooksRepository,
+    UserRolesRepository,
+    UsersRepository,
   ]
 }
 )
