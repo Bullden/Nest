@@ -17,8 +17,11 @@ export class AuthService {
   constructor(public AuthRepository : AuthRepository) {}
 
   async validateUser(email: string, password: string): Promise<any> {
+    
     let loginValid = await validLogin(email,password)
-    if(loginValid.stateValid !==2){
+
+    // console.log(loginValid.stateValid)
+    if(loginValid.stateValid === 3){
       throw new HttpException(loginValid.errorObj, 404);
     }
 

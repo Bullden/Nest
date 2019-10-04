@@ -18,8 +18,11 @@ export class BooksService {
   }
   async deleteBook(req): Promise<BookModel> {
     if (req.params.id) {
+
       await this.BooksRepository.deleteBook(req.params.id);
+      
       return {
+        
         success: true,
       };
     }

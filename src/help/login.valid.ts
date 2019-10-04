@@ -1,4 +1,5 @@
 export const validLogin = (email, password) =>{
+    console.log(email,password)
     const errorObj = {
       logErrorEmail: '',
       logErrorPassword: ''
