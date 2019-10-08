@@ -1,7 +1,5 @@
 import { BooksRepository } from './../repositories';
-import {
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { books } from '../entities/books.entity';
 
 @Injectable()
@@ -13,16 +11,14 @@ export class BooksService {
   }
 
   async findOne(req): Promise<books> {
-    let book: any = await this.BooksRepository.findOne(req.params.id);
+    let book: any = await this.BooksRepository.findOne(req);
     return book;
   }
   async deleteBook(req): Promise<BookModel> {
-    if (req.params.id) {
+    if (req) {
+      await this.BooksRepository.deleteBook(req);
 
-      await this.BooksRepository.deleteBook(req.params.id);
-      
       return {
-        
         success: true,
       };
     }
@@ -35,11 +31,11 @@ export class BooksService {
   }
 
   async postBook(req): Promise<BookModel> {
-    const book = req.body;
+    const book = req;
     await this.BooksRepository.addBook(book);
 
     return {
-      success: true
+      success: true,
     };
   }
 }
