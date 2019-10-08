@@ -85,7 +85,6 @@ export class UsersService {
       };
       try {
         const matchUser: any = await this.UsersRepository.findOne({
-          // attributes: ['_id'],
           where: { email: req.email },
         });
 
