@@ -36,7 +36,7 @@ export class UsersService {
 
   async findOne(req, res): Promise<users[]> {
     try {
-      const user = await this.UsersRepository.findOne({attributes: ['_id', 'name', 'password', 'email'],where: { _id: req.params._id }})
+      const user = await this.UsersRepository.findOne({attributes: ['_id', 'name', 'password', 'email'],where: { _id: req }})
       if (user) {
         return res.status(200).send({
           user,
@@ -53,12 +53,12 @@ export class UsersService {
     }
   }
 
-  async update(req, res): Promise<UserModel> {
+  async update(reqBody,reqId, res): Promise<UserModel> {
     try {
-      const check = await this.UsersRepository.findOne({where: { _id: req.params.id }});
+      const check = await this.UsersRepository.findOne({where: { _id: reqId }});
 
       if (check) {
-        await this.UsersRepository.update(req.body, req.params.id);
+        await this.UsersRepository.update(reqBody, reqId);
         return res.status(200).send({
           message: 'Update is done',
         });
@@ -75,18 +75,18 @@ export class UsersService {
   }
 
   async registerNewUser(req, res): Promise<UserModel> {
-    let valid = await validRegister(req.body);
+    let valid = await validRegister(req);
     if (valid.stateValid) {
       const newUser: any = {
         _id: null,
-        email: req.body.email,
-        password: await bcrypt.hash(req.body.password, 10),
-        name: req.body.name,
+        email: req.email,
+        password: await bcrypt.hash(req.password, 10),
+        name: req.name,
       };
       try {
         const matchUser: any = await this.UsersRepository.findOne({
           // attributes: ['_id'],
-          where: { email: req.body.email },
+          where: { email: req.email },
         });
 
         if (!matchUser) {
