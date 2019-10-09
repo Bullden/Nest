@@ -16,7 +16,6 @@ export class BooksService {
     return book;
   }
   async deleteBook(req): Promise<BookModel> {
-    console.log(req);
     
     if (req) {
       await this.BooksRepository.deleteBook(req);
