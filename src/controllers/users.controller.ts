@@ -22,25 +22,25 @@ export class UsersController {
   ) {}
 
   @Get()
-  findAll(@Res() res: Response): any {
+  findAll(@Res() res: Response) {
     return this.usersService.findAll(res);
   }
 
   @Get('/:id')
-  findOne(@Req() req: Request, @Res() res: Response): any {
+  findOne(@Req() req: Request, @Res() res: Response) {  
     return this.usersService.findOne(req.params._id, res);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
-  update(@Req() req: Request, @Res() res: Response): any {
-      const reqBody = req.body
-      const reqId = req.params.id
-    return this.usersService.update(reqBody,reqId, res);
+  update(@Req() req: Request, @Res() res: Response) {
+    const reqBody = req.body;
+    const reqId = req.params.id;
+    return this.usersService.update(reqBody, reqId, res);
   }
 
   @Post('/registration')
-  registerNewUser(@Req() req: Request, @Res() res: Response): any {
+  registerNewUser(@Req() req: Request, @Res() res: Response) {
     return this.usersService.registerNewUser(req.body, res);
   }
 }

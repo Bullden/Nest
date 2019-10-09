@@ -1,6 +1,7 @@
 import { BooksRepository } from './../repositories';
 import { Injectable } from '@nestjs/common';
 import { books } from '../entities/books.entity';
+import { BookModel } from 'src/models/books.service.model';
 
 @Injectable()
 export class BooksService {
@@ -15,6 +16,8 @@ export class BooksService {
     return book;
   }
   async deleteBook(req): Promise<BookModel> {
+    console.log(req);
+    
     if (req) {
       await this.BooksRepository.deleteBook(req);
 
