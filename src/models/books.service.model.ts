@@ -5,9 +5,10 @@ export interface BookModel {
     message?: string;
 }
 export interface BookModelDelete {
-    params: {
-        id:string
-    }
+    id:number
+//     params: {
+//         id:string
+//     }
 }
 export interface BookModelPost {
     body: books

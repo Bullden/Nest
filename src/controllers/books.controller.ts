@@ -8,11 +8,12 @@ import {
   UseGuards,
   Res,
   Body,
+  Param,
 } from '@nestjs/common';
 import { BooksService } from '../services/books.service';
 import { Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
-import { BookModelDelete, BookModelPost } from 'src/models/books.service.model';
+import { BookModelDelete, BookModelPost, BookModelGet } from 'src/models/books.service.model';
 
 @Controller('books')
 export class BooksController {
@@ -24,19 +25,23 @@ export class BooksController {
   }
 
   @Get('/id/:id')
-  findOne(@Req() req: Request) {
-    return this.booksService.findOne(req.params.id);
+  findOne(@Param() req: BookModelDelete) {
+    return this.booksService.findOne(req.id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
-  deleteBook(@Req() req: BookModelDelete) { 
-    return this.booksService.deleteBook(req.params.id);
+  deleteBook(@Param() req: BookModelGet) { 
+    console.log(req);
+    
+    return this.booksService.deleteBook(req.id);
   }
-  
+
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  postBook(@Req() req: BookModelPost) {
-    return this.booksService.postBook(req.body);
+  postBook(@Body() req: BookModelPost) {
+    console.log(req);
+    
+    return this.booksService.postBook(req);
   }
 }
