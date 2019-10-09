@@ -6,6 +6,7 @@ import { users, users_roles, roles } from '../entities/users.entity';
 import { validRegister } from '../help/register.valid';
 import * as bcrypt from 'bcrypt';
 import {UserRolesRepository, UsersRepository} from '../repositories'
+import { UserModel } from 'src/models/users.service.model';
 
 @Injectable()
 export class UsersService {

@@ -1,6 +1,9 @@
-interface UserModel {
+import { users } from "../entities";
+
+
+export interface UserModel {
     success: boolean;
     message?: string;
     errorValid?: boolean;
-    data?: {};
+    data?: users|{} ;
 }
