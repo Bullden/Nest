@@ -6,10 +6,10 @@ export interface BookModel {
 }
 export interface BookModelDelete {
     id:number
-//     params: {
-//         id:string
-//     }
 }
 export interface BookModelPost {
     body: books
+}
+export interface BookModelGet {
+    id:number
 }

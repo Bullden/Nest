@@ -25,23 +25,19 @@ export class BooksController {
   }
 
   @Get('/id/:id')
-  findOne(@Param() req: BookModelDelete) {
+  findOne(@Param() req: BookModelGet) {
     return this.booksService.findOne(req.id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
-  deleteBook(@Param() req: BookModelGet) { 
-    console.log(req);
-    
+  deleteBook(@Param() req: BookModelDelete) {  
     return this.booksService.deleteBook(req.id);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Post()
-  postBook(@Body() req: BookModelPost) {
-    console.log(req);
-    
+  postBook(@Body() req: BookModelPost) {   
     return this.booksService.postBook(req);
   }
 }
